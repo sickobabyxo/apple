@@ -1,4 +1,4 @@
-const { createOptionHandler, FileUtils } = require("../utils")
+const { createOptionHandler, FileUtils } = require('../utils')
 
 module.exports = class Loader {
   /**
@@ -7,11 +7,11 @@ module.exports = class Loader {
    * @param {Client} client
    */
   constructor (options, client) {
-    options = createOptionHandler("Loader", options)
+    options = createOptionHandler('Loader', options)
 
-    this.critical = options.optional("critical", false)
+    this.critical = options.optional('critical', false)
 
-    this.name = options.optional("name", this.constructor.name)
+    this.name = options.optional('name', this.constructor.name)
 
     this.client = client
   }
@@ -19,7 +19,7 @@ module.exports = class Loader {
   async preLoad () {
     try {
       const success = await this.load()
-      if (!success) throw new Error("Unhandled error")
+      if (!success) throw new Error('Unhandled error')
       return success
     } catch (e) {
       console.log(e)
@@ -28,7 +28,7 @@ module.exports = class Loader {
   }
 
   async loadFiles (path, recursive = false) {
-    if (!path || typeof path !== "string") throw new TypeError(`The 'path' argument on '${this.constructor.name}.loadFiles()' must be a string. Received ${typeof path} instead.`)
+    if (!path || typeof path !== 'string') throw new TypeError(`The 'path' argument on '${this.constructor.name}.loadFiles()' must be a string. Received ${typeof path} instead.`)
     let success = 0
     let fails = 0
     const errorFunction = e => {
@@ -49,8 +49,8 @@ module.exports = class Loader {
       }
     }
     await FileUtils.requireDirectory(path, successFunction, errorFunction, recursive).then(() => {
-      if (fails) this.client.console(false, `${success} types of ${this.name} loaded, ${fails} failed.`, "Loaders")
-      else this.client.console(false, `All ${success} types of ${this.name} loaded without errors.`, "Loaders")
+      if (fails) this.client.console(false, `${success} types of ${this.name} loaded, ${fails} failed.`, 'Loaders')
+      else this.client.console(false, `All ${success} types of ${this.name} loaded without errors.`, 'Loaders')
     })
     return true
   }
