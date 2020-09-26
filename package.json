@@ -1,0 +1,27 @@
+{
+  "name": "apple",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sickobabyxo/apple.git"
+  },
+  "keywords": [
+    "eris",
+    "discord"
+  ],
+  "author": "baby",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sickobabyxo/apple/issues"
+  },
+  "homepage": "https://github.com/sickobabyxo/apple#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eris": "^0.13.3"
+  }
+}
