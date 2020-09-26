@@ -10,7 +10,7 @@ module.exports = class ListenerLoader extends Loader {
     }
 
     loadFile (NewListener) {
-        const listener = new NewListener(this.base)
+        const listener = new NewListener(this.client)
         if (!(listener instanceof Listener)) {
             throw new Error(`Failed to load ${NewListener.name}: not an instanceof listener.`)
         }

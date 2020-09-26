@@ -1,6 +1,6 @@
 require('dotenv/config')
 
-const Client = require('.src/Client')
+const Client = require('./src/Client')
 
 const CLIENT_OPTIONS = {
     autoreconnect: true,
@@ -10,5 +10,3 @@ const CLIENT_OPTIONS = {
 }
 
 const client = new Client(process.env.DISCORD_TOKEN, CLIENT_OPTIONS)
-
-client.connect()
