@@ -1,5 +1,7 @@
 const { createOptionHandler } = require('../../utils')
 const Embed = require('../Embed')
+const CommandError = require('./CommandError')
+const CommandRequirements = require('./CommandRequirements')
 
 module.exports = class Command {
     constructor(opts, client) {
@@ -19,23 +21,18 @@ module.exports = class Command {
         } catch (err) {
             return this.error(context, err)
         }
-        
+
         try {
             this.run(context, args)
         } catch (err) {
-            return this.error(context, args)
+            return console.log(args)
         }
     }
 
     handleRequirements(context, args) {
         return this.requirements ? CommandRequirements.handle(context, this.requirements, args) : true
     }
-
-    get fullName () {
-        return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
-    }
-
-
+    
     error ({ t, author, channel, prefix }, error) {
         if (error instanceof CommandError) {
           const usage = this.usage(t, prefix)
@@ -44,6 +41,10 @@ module.exports = class Command {
           return channel.createMessage({ content: `${author.username}#${author.discriminator}:`, embed })
         }
         console.error(error)
+    }
+
+    get fullName () {
+        return this.parentCommand ? `${this.parentCommand.fullName} ${this.name}` : this.name
     }
 
     usage(t, prefix, noUsage = true) {
